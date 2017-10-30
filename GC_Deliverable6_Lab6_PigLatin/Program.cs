@@ -53,25 +53,30 @@ namespace GC_Deliverable6_Lab6_PigLatin
         public static void ZiggyPiggy(string strInit)
         {
             //prep for translation
-            string str1          = strInit.ToLower();
-            char[] vowels        = new char[5] { 'a', 'e', 'i', 'o', 'u' };
-            int    vowelFirstPos = str1.IndexOfAny(vowels);
-            
+            string[] strArr        = strInit.Split(' ');
+            char[]   vowels        = new char[10] { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+            int      vowelFirstPos = 0;
+
             //translate
-            if (vowelFirstPos == 0)
+            Console.Write("Translation: ");
+            for (int i = 0; i < strArr.Length; i++)
             {
-                Console.WriteLine("Translation: " + str1 + "way");
-                return;
-            }
-            else if (vowelFirstPos < 0 || SpecialCharSearch(strInit))
-            {
-                Console.WriteLine("Translation: " + str1);
-            }
-            else
-            {
-                Console.WriteLine("Translation: " + strInit.Substring(vowelFirstPos) + strInit.Substring(0, vowelFirstPos) + "ay");
+                vowelFirstPos = strArr[i].IndexOfAny(vowels);
+                if (vowelFirstPos == 0)
+                {
+                    Console.Write(strArr[i].Trim() + "way ");
+                }
+                else if (vowelFirstPos < 0 || SpecialCharSearch(strArr[i].Trim()))
+                {
+                    Console.Write(strArr[i].Trim() + " ");
+                }
+                else
+                {
+                    Console.Write(strArr[i].Trim().Substring(vowelFirstPos) + strArr[i].Trim().Substring(0, vowelFirstPos) + "ay ");
+                }
             }
 
+            Console.WriteLine();
             Console.WriteLine();
         }
 
